@@ -1,4 +1,4 @@
-# Caravelo Viz [![Build Status](https://secure.travis-ci.org/michaux/cvo-viz.png?branch=master)](http://travis-ci.org/michaux/cvo-viz)
+# Caravelo Viz [![Build Status](https://secure.travis-ci.org/caravelo/viz.png?branch=master)](http://travis-ci.org/caravelo/viz)
 
 Business intelligence visualization components for Keen.io
 
