@@ -1,0 +1,36 @@
+{
+  "name": "cvo-viz",
+  "description": "Business intelligence visualization components for Keen.io",
+  "main": [
+    "dist/cvo-viz.min.js",
+    "dist/css/cvo-viz.min.css"
+  ],
+  "authors": [
+    "Marc Fornós <marc.fornos@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "data",
+    "visualization",
+    "business",
+    "intelligence",
+    "dashboard",
+    "kpi",
+    "scorecard",
+    "keen io"
+  ],
+  "homepage": "http://caravelo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "keen-js": "~3.2.1",
+    "jquery": "~2.1.1",
+    "jquery-sparkline": "~2.1.3"
+  }
+}

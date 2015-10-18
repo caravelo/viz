@@ -1,0 +1,32 @@
+/*
+ Keen dashboard integration
+*/
+.chart-wrapper {
+  table.table-scorecard {
+    font-family: Arial;
+    th {
+      font-size: 14px;
+      font-weight: 200;
+      color: #222;
+    }
+    td {
+      font-size: 12px;
+      color: #222;
+    }
+    .kpi-delta.delta-neg:after {
+        content: "\2B07";
+        margin-left: 5px;
+        color: #d9534f;
+    }
+    .kpi-delta.delta-pos:after {
+        content: "\2B06";
+        margin-left: 5px;
+        color: #5cb85c;
+    }
+    .kpi-delta.delta-none:after {
+        content: "\2B05";
+        margin-left: 5px;
+        color: #777;
+    }
+  }
+}

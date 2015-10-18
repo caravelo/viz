@@ -1,0 +1,34 @@
+{
+  "name": "cvo-viz",
+  "version": "0.0.1",
+  "homepage": "http://www.ok.com",
+  "author": {
+    "name": "Marc Fornós <marc.fornos@gmail.com>"
+  },
+  "license": "MIT",
+  "browser": "dist/cvo-viz.min.js",
+  "browserify": {
+    "transform": [
+      "browserify-versionify"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "*",
+    "browserify-versionify": "*",
+    "chai": "*",
+    "clean-css": "*",
+    "istanbul": "*",
+    "jsdom": "*",
+    "jshint": "*",
+    "mocha-runner": "*",
+    "node-sass": "*",
+    "uglifyjs": "*"
+  },
+  "scripts": {
+    "lint": "jshint src/**/*.js",
+    "test": "istanbul test mocha-runner 'test/**/*.js'",
+    "build-js": "browserify src/viz.js | uglifyjs -mc > dist/${npm_package_name}.min.js",
+    "build-css": "node-sass --include-path scss scss/viz.scss | cleancss -o dist/css/${npm_package_name}.min.css"
+  }
+}

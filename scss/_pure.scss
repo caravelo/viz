@@ -1,0 +1,32 @@
+/* Pure theme */
+
+.dashboard-block {
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font: $font;
+    h2 {
+        color: $accent;
+        font-weight: normal;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+}
+.dashboard-block.first {
+    margin-left: 5px;
+}
+
+table.pure-table {
+  border: none;
+  border-bottom: 2px solid $neutro;
+  margin-bottom: 5px;
+  thead {
+    background: transparent;
+  }
+  .funnel td {
+    padding: 0 0 1px 3px;
+    border-bottom: none;
+  }
+}
