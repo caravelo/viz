@@ -98,6 +98,8 @@ Keen.ready(function() {
 </html>
 ```
 
+## Examples
+
 Browse the `examples` folder for complete use cases.
 
 ## Components
