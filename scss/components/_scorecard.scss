@@ -1,0 +1,71 @@
+table.table-scorecard {
+    thead {
+        th {
+            border-bottom-width: 2px;
+            padding: .5em 0;
+        }
+    }
+    tbody {
+        td {
+            padding: .5em 1em .5em 0;
+            vertical-align: middle;
+        }
+        td:last-child,
+        td.kpi-right {
+            padding-right: 0;
+        }
+        td.clear {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+    td.table-footer {
+        font-size: 0.8em;
+        text-align: right;
+        padding-top: 5px;
+        border-top: 1px dashed $neutro;
+        color: $neutro-dark;
+    }
+
+    /* KPI */
+    .kpi-delta.delta-neg:after {
+        content: "\2B07";
+        margin-left: 5px;
+        color: $c-neg;
+    }
+    .kpi-delta.delta-pos:after {
+        content: "\2B06";
+        margin-left: 5px;
+        color: $c-pos;
+    }
+    .kpi-delta.delta-none:after {
+        content: "\2B05";
+        margin-left: 5px;
+        color: $neutro;
+    }
+    .kpi-small {
+        font-size: 0.9em;
+    }
+    .kpi-smaller {
+        font-size: 0.85em;
+    }
+    .kpi-right {
+        text-align: right;
+        padding-left: 5px;
+    }
+    .kpi-bullet-desc {
+        text-align: right;
+        float: right;
+    }
+}
+
+/* Table sorter */
+.tablesorter-default th.kpi-right .tablesorter-header-inner {
+    text-align: right;
+    padding-right: 2em;
+}
+
+/* Fixes Bootstrap box model issue */
+#jqstooltip {
+    box-sizing: content-box;
+}

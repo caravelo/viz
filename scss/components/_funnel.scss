@@ -1,0 +1,31 @@
+/* Funnel */
+
+.funnel {
+    width: 100%;
+    .funnel-step-bar {
+        background-color: $c-chart;
+        height: 20px;
+        width: 0;
+    }
+    .funnel-bar-wrap {
+        width: 30%;
+    }
+    .funnel-value-wrap {
+        width: 20%;
+    }
+    .funnel-head {
+        text-align: center;
+    }
+    .funnel-step-value {
+        float: right;
+        text-align: right;
+    }
+    .funnel-step-name {
+        font-size: 0.85em;
+    }
+    .funnel-step-ratio {
+        font-size: 0.85em;
+        text-align: right;
+        float: right;
+    }
+}
