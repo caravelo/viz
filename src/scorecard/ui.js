@@ -65,7 +65,7 @@ UI.Value = function (opts) {
    if (typeof ctx.meta.valueFmt === 'function') {
     this.text(ctx.meta.valueFmt(lval, fmt.nFormat));
    } else if (ctx.meta.ratios) {
-    this.text(fmt.asPercentage(lval) + '%');
+    this.text(fmt.nPercent(lval));
    } else {
     this.text(fmt.nFormat(lval));
    }
@@ -84,7 +84,7 @@ UI.Sum = function (opts) {
    if (typeof ctx.meta.valueFmt === 'function') {
     this.text(ctx.meta.valueFmt(ctx.sum, fmt.nFormat));
    } else if (ctx.meta.ratios) {
-    this.text(fmt.asPercentage(ctx.sum / ctx.length) + '%');
+    this.text(fmt.nPercent(ctx.sum / ctx.length));
    } else {
     this.text(fmt.nFormat(ctx.sum));
    }
@@ -113,7 +113,7 @@ UI.Delta = function (opts) {
      dc = 'delta-' + (d < 0 ? 'neg' : d === 0 ? 'none' : 'pos'),
      diff = (lastLast === 0 ? (d / 100) : (d / lastLast));
    this.addClass(dc);
-   this.text(fmt.asPercentage(diff) + '%');
+   this.text(fmt.nPercent(diff));
  };
 };
 extend(UI.Delta, UI.Component);

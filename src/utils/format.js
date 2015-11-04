@@ -22,12 +22,20 @@ var SI_EXPS = [{
 
 module.exports = {
   /**
-  */
+   * Transforms a decimal representation of a percentage into a percent.
+   */
   asPercentage: function (num) {
     return parseFloat((num.toFixed(4) * 100).toFixed(2));
   },
   /**
-  */
+   * Formats a percent given a decimal representation.
+   */
+  nPercent: function (num) {
+    return this.asPercentage(num) + '%';
+  },
+  /**
+   * Formats a number using SI units for powers of ten (e.g 10k, 1M).
+   */
   nFormat: function (num, digits) {
     var i = 0,
       d = digits || 1,
@@ -39,7 +47,7 @@ module.exports = {
         return (num / si[i].value).toFixed(d).replace(/\.?0+$/, '') + si[i].symbol;
       }
     }
-    // Strip decimals when needed
+    // Note that parseFloat strips decimals when needed
     return String(parseFloat(num.toFixed(d)));
   }
 };

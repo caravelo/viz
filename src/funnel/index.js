@@ -10,16 +10,16 @@ var fmt = require('../utils/format.js');
  *
  * @param {String} selector
  */
-module.exports = function (selector, opts) {
+module.exports = function (selector, _opts) {
   var f = this,
-      opts = opts || { orientation: 'vertical' };
+      opts = _opts || { orientation: 'vertical' };
   this.selector = selector;
 
   /**
    *
    */
   this.draw = function (client, query) {
-    if ($.isArray(query)) {
+    if (Object.prototype.toString.call(query) === '[object Array]') {
       this._handleMultiQuery(client, query);
     } else {
       this._handleSingleQuery(client, query);

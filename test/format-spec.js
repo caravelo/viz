@@ -29,25 +29,28 @@ describe('Format Spec', function () {
   it('should print 10.5', function () {
     fmt.nFormat(10.55).should.equal('10.6');
   });
-  it('should be 101%', function () {
+  it('should be 101', function () {
     fmt.asPercentage(1.01).should.equal(101);
   });
-  it('should be 11%', function () {
+  it('should be 101%', function () {
+    fmt.nPercent(1.01).should.equal('101%');
+  });
+  it('should be 11', function () {
     fmt.asPercentage(0.11).should.equal(11.00);
   });
-  it('should be 1%', function () {
+  it('should be 1', function () {
     fmt.asPercentage(0.01).should.equal(1.00);
   });
-  it('should be -201%', function () {
+  it('should be -201', function () {
     fmt.asPercentage(-2.01).should.equal(-201);
   });
-  it('should be 0.01%', function () {
+  it('should be 0.01', function () {
     fmt.asPercentage(0.0001).should.equal(0.01);
   });
-  it('should be -0.01%', function () {
+  it('should be -0.01', function () {
     fmt.asPercentage(-0.0001).should.equal(-0.01);
   });
-  it('should be 0%', function () {
+  it('should be 0', function () {
     fmt.asPercentage(0.00000001).should.equal(0);
   });
 
