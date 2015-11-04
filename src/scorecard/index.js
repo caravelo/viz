@@ -81,7 +81,9 @@ Scorecard.prototype.draw = function (params, afterDraw) {
   this.datum.waitFor(p.length);
 
   $.each(p, function (i, v) {
-    if (v.query.params.group_by) {
+    if(v.data) {
+      sc._handleRawData(v);
+    } else if (v.query.params.group_by) {
       sc._handleGroupQuery(v.client, v.query);
     } else {
       sc._handleQuery(v);
@@ -131,6 +133,19 @@ Scorecard.prototype._findTemplate = function (el) {
   } else {
     throw new Error('Template not found.' + "Please, add a child element with a '" + attr + "' attribute.");
   }
+};
+
+Scorecard.prototype._handleRawData = function (p) {
+  var dat = this.datum,
+      name = p.name;
+
+  dat.register(name, p.meta);
+  
+  $.each(p.data, function (i, r) {
+    dat.push(name, r.value);
+  });
+
+  dat.ack();
 };
 
 Scorecard.prototype._handleGroupQuery = function (client, query) {

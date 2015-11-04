@@ -39,6 +39,7 @@ module.exports = {
         return (num / si[i].value).toFixed(d).replace(/\.?0+$/, '') + si[i].symbol;
       }
     }
-    return num;
+    // Strip decimals when needed
+    return String(parseFloat(num.toFixed(d)));
   }
 };

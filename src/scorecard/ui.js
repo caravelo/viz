@@ -61,7 +61,14 @@ UI.Value = function (opts) {
    selector: '.kpi-last-value'
  });
  this.render = function (ctx) {
-   this.text(fmt.nFormat(ctx.rows[ctx.length - 1]));
+   var lval = ctx.rows[ctx.length - 1];
+   if (typeof ctx.meta.valueFmt === 'function') {
+    this.text(ctx.meta.valueFmt(lval, fmt.nFormat));
+   } else if (ctx.meta.ratios) {
+    this.text(fmt.asPercentage(lval) + '%');
+   } else {
+    this.text(fmt.nFormat(lval));
+   }
  };
 };
 extend(UI.Value, UI.Component);
@@ -74,7 +81,13 @@ UI.Sum = function (opts) {
    selector: '.kpi-sum'
  });
  this.render = function (ctx) {
-   this.text(fmt.nFormat(ctx.sum));
+   if (typeof ctx.meta.valueFmt === 'function') {
+    this.text(ctx.meta.valueFmt(ctx.sum, fmt.nFormat));
+   } else if (ctx.meta.ratios) {
+    this.text(fmt.asPercentage(ctx.sum / ctx.length) + '%');
+   } else {
+    this.text(fmt.nFormat(ctx.sum));
+   }
  };
 };
 extend(UI.Sum, UI.Component);
@@ -98,7 +111,7 @@ UI.Delta = function (opts) {
      lastLast = rows[rows.length - 2],
      d = rows.length < 2 ? 0 : lastValue - lastLast,
      dc = 'delta-' + (d < 0 ? 'neg' : d === 0 ? 'none' : 'pos'),
-     diff = (d >= 0) ? (lastLast === 0 ? d : (d / lastLast)) : (lastValue === 0 ? d : (d / lastValue));
+     diff = (lastLast === 0 ? (d / 100) : (d / lastLast));
    this.addClass(dc);
    this.text(fmt.asPercentage(diff) + '%');
  };

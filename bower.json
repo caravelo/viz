@@ -31,6 +31,6 @@
   "dependencies": {
     "keen-js": "~3.2.1",
     "jquery": "~2.1.1",
-    "jquery-sparkline": "~2.3.0"
+    "jquery-sparkline": "~2.1.3"
   }
 }

@@ -23,6 +23,12 @@ describe('Format Spec', function () {
   it('should print 1.5G units', function () {
     fmt.nFormat(1500000001).should.equal('1.5G');
   });
+  it('should print 10', function () {
+    fmt.nFormat(10).should.equal('10');
+  });
+  it('should print 10.5', function () {
+    fmt.nFormat(10.55).should.equal('10.6');
+  });
   it('should be 101%', function () {
     fmt.asPercentage(1.01).should.equal(101);
   });
