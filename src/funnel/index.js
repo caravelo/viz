@@ -10,15 +10,39 @@ var fmt = require('../utils/format.js');
  *
  * @param {String} selector
  */
-module.exports = function (selector) {
-  var f = this;
+module.exports = function (selector, opts) {
+  var f = this,
+      opts = opts || { orientation: 'vertical' };
   this.selector = selector;
 
   /**
    *
    */
-  this.draw = function (client, funnel) {
-    client.run(funnel, function (err, response) {
+  this.draw = function (client, query) {
+    if ($.isArray(query)) {
+      this._handleMultiQuery(client, query);
+    } else {
+      this._handleSingleQuery(client, query);
+    }
+  };
+
+  this._handleMultiQuery = function (client, query) {
+    client.run(query, function (err, response) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      var i = 0,
+          result = [];
+      for(; i < query.length; i++) {
+        result.push(response[i].result);
+      }
+      f._render(result);
+    });
+  };
+
+  this._handleSingleQuery = function (client, query) {
+    client.run(query, function (err, response) {
       if (err) {
         console.log(err);
         return;
@@ -28,21 +52,28 @@ module.exports = function (selector) {
   };
 
   this._render = function (data) {
-    var max = data[0],
-      last = 0;
-    $.each(data, function (i, v) {
+    var i = 0,
+      len = data.length,
+      prop = (opts.orientation === 'vertical' ? 'width' : 'height');
+
+    for(; i < len; i++) {
       var step = i + 1,
+        v = data[i],
         el = $(f.selector).find('.funnel-step-' + step),
-        dm = max <= 0 ? 0 : 100 - (((max - v) / max) * 100).toFixed(0),
-        dl = last - v;
+        // dm = max <= 0 ? 0 : 100 - (((max - v) / max) * 100).toFixed(0),
+        isLast = step >= len,
+        next = isLast ? 0 : data[step],
+        dn = v - next,
+        sr = ((dn / v).toFixed(4) * 100),
+        dm = sr <= 0 ? 0 : (100 - sr).toFixed(0);
 
       el.find('.funnel-step-value').text(fmt.nFormat(v, 1));
-      el.find('.funnel-step-bar').css('width', (v > 0 && dm <= 0 ? 1 : dm) + '%');
-      if (dl >= 0) {
-        el.find('.funnel-step-ratio').text((100 - ((dl / last).toFixed(4) * 100)).toFixed(2) + '%');
-      }
+      el.find('.funnel-step-bar').css(prop, (v > 0 && dm <= 0 ? 100 : dm) + '%');
 
-      last = v;
-    });
+      if (!isLast) {
+        el.find('.funnel-step-ratio').text((100 - sr).toFixed(2) + '%');
+        el.find('.funnel-step-churn-ratio').text(sr.toFixed(2) + '%');
+      }
+    }
   };
 };
