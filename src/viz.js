@@ -1,4 +1,5 @@
 /*
+ * Viz module definition.
  */
 (function (factory) {
   'use strict';

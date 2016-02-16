@@ -124,3 +124,22 @@ Scorecards display progress over time. They allow you to display state indicator
 
 [TBD]
 
+## Building
+
+Javascript
+
+```
+$ npm run-script build-js
+```
+Styles
+
+```
+$ npm run-script build-css
+```
+
+## Testing
+
+```
+$ npm test
+```
+

@@ -3,7 +3,8 @@
 
 var UI = require('./ui.js'),
       Datum = require('./datum.js'),
-      Theme = require('../themes');
+      Theme = require('../themes'),
+      Spinner = require('spin.js');
 
 /**
  * Scorecard Component.
@@ -49,7 +50,12 @@ function Scorecard(id, opts) {
     sc._render();
     sc._afterDraw();
   });
+
+  this._spinner = new Spinner(o.spin);
   this._afterDraw = function () {};
+
+  // Starts loading
+  sc._startLoading();
 
 }
 
@@ -91,12 +97,26 @@ Scorecard.prototype.draw = function (params, afterDraw) {
   });
 };
 
+Scorecard.prototype._startLoading = function () {
+  var el = $('<div class="viz-loading"></div>');
+  $(this.id).parent().append(el);
+  this._spinner.spin(el[0]);
+};
+
+Scorecard.prototype._endLoading = function () {
+  this._spinner.stop();
+  $(this.id).parent().find('.viz-loading').remove();
+};
+
 Scorecard.prototype._render = function () {
   var index = 0,
     root = $(this.id),
     template = this._findTemplate(root),
     datum = this.datum,
     idName = root.attr('id') || this.id.substring(1);
+
+  // Ends loading
+  this._endLoading();
 
   for (var key in datum.holder) {
     var ctx = {

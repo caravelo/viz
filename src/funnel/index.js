@@ -1,7 +1,8 @@
 /* global $ */
 'use strict';
 
-var fmt = require('../utils/format.js');
+var fmt = require('../utils/format.js'),
+    Spinner = require('spin.js');
 
 /**
  * Simple funnel.
@@ -12,8 +13,9 @@ var fmt = require('../utils/format.js');
  */
 module.exports = function (selector, _opts) {
   var f = this,
-      opts = _opts || { orientation: 'vertical' };
+      opts = _opts || { orientation: 'vertical', spin: { color: '#888', lines: 8} };
   this.selector = selector;
+  this._spinner = new Spinner(opts.spin);
 
   /**
    *
@@ -56,6 +58,8 @@ module.exports = function (selector, _opts) {
       len = data.length,
       prop = (opts.orientation === 'vertical' ? 'width' : 'height');
 
+    f._endLoading();
+
     for(; i < len; i++) {
       var step = i + 1,
         v = data[i],
@@ -76,4 +80,23 @@ module.exports = function (selector, _opts) {
       }
     }
   };
+
+  this._startLoading = function () {
+    var root = $(f.selector),
+        el = $('<div class="viz-loading"></div>');
+    root.hide();
+    root.parent().append(el);
+    f._spinner.spin(el[0]);
+  };
+
+  this._endLoading = function () {
+    var root = $(f.selector);
+    f._spinner.stop();
+    root.parent().find('.viz-loading').remove();
+    root.show();
+  };
+
+  // Starts loading
+  f._startLoading();
+
 };

@@ -48,7 +48,8 @@ Theme.Pure =  {
         negBarColor: '#C21A01'
       }
     }
-  }
+  },
+  spin: { color:'#888', lines: 8 }
 };
 
 /**
@@ -75,7 +76,8 @@ Theme.Bootstrap =  Theme.extend({
         rangeColors: ['#EEE', '#FCF8E3', '#F2DEDE']
       }
     }
-  }
+  },
+  spin: { color:'#888', lines: 8 }
 });
 
 module.exports = Theme;
