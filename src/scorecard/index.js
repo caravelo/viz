@@ -98,14 +98,18 @@ Scorecard.prototype.draw = function (params, afterDraw) {
 };
 
 Scorecard.prototype._startLoading = function () {
-  var el = $('<div class="viz-loading"></div>');
-  $(this.id).parent().append(el);
+  var el = $('<div class="viz-loading"></div>'),
+      root = $(this.id);
+  root.hide();
+  root.parent().append(el);
   this._spinner.spin(el[0]);
 };
 
 Scorecard.prototype._endLoading = function () {
+  var root = $(this.id);
   this._spinner.stop();
-  $(this.id).parent().find('.viz-loading').remove();
+  root.parent().find('.viz-loading').remove();
+  root.show();
 };
 
 Scorecard.prototype._render = function () {
